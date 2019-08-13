@@ -1,0 +1,27 @@
+[
+    {
+        "mode": "REQUIRED",
+        "name": "RunName",
+        "type": "STRING"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "RunTimestamp",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "EventTime",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "GenId",
+        "type": "INTEGER"
+    },
+    {
+        "mode": "REQUIRED",
+        "name": "Number",
+        "type": "INTEGER"
+    }
+]

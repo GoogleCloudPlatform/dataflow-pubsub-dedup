@@ -1,0 +1,48 @@
+# home desktop
+export GOOGLE_APPLICATION_CREDENTIALS=/mnt/c/code/gcloud/keys/ps-karthiproject1-75ad53d32ebf.json
+export PROJECT=karthiproject1
+export PUBSUB_TOPIC=dedup
+export DATASET=karthidemo1
+
+# mac
+export GOOGLE_APPLICATION_CREDENTIALS=~/keys/karthiproject1-804f158f51e2.json
+export PROJECT=karthiproject1
+export PUBSUB_TOPIC=dedup
+export DATASET=karthidemo1
+
+gcloud pubsub subscriptions delete dedupsub1
+gcloud pubsub subscriptions delete dedupsub2
+gcloud pubsub subscriptions create dedupsub1 --topic dedup
+gcloud pubsub subscriptions create dedupsub2 --topic dedup
+
+mvn compile exec:java \
+      -Dexec.mainClass=com.google.examples.dfdedup.DedupWithPubSubIO \
+      -Dexec.args="--project=karthiproject1 \
+      --BQDataset=karthidemo1 \
+      --pubSubSubscriptionForDedup=dedupsub1 \
+      --targetParallelism=1 \
+      --runner=DirectRunner"
+
+mvn compile exec:java \
+      -Dexec.mainClass=com.google.examples.dfdedup.DedupWithDistinct \
+      -Dexec.args="--project=karthiproject1 \
+      --BQDataset=karthidemo1 \
+      --pubSubSubscriptionForDedup=dedupsub1 \
+      --targetParallelism=1 \
+      --runner=DirectRunner"
+
+mvn compile exec:java \
+      -Dexec.mainClass=com.google.examples.dfdedup.DedupWithState \
+      -Dexec.args="--project=karthiproject1 \
+      --BQDataset=karthidemo1 \
+      --pubSubSubscriptionForDedup=dedupsub1 \
+      --targetParallelism=1 \
+      --runner=DirectRunner"
+
+mvn compile exec:java \
+      -Dexec.mainClass=com.google.examples.dfdedup.DedupWithStateAndGC \
+      -Dexec.args="--project=karthiproject1 \
+      --BQDataset=karthidemo1 \
+      --pubSubSubscriptionForDedup=dedupsub1 \
+      --targetParallelism=1 \
+      --runner=DirectRunner"

@@ -1,0 +1,10 @@
+SELECT
+ C.RunName,
+ (SELECT Count(*) FROM (SELECT DISTINCT RunName, Number FROM `karthiproject1.karthidemo1.DedupDataGenView` WHERE RunName = C.RunName)) AS ExpectedCount,
+ (SELECT Count(*) FROM `karthiproject1.karthidemo1.DedupDataGenView` WHERE RunName = C.RunName) AS OrigCount,
+ (SELECT Count(*) FROM `karthiproject1.karthidemo1.DedupResultsView` WHERE RunName = C.RunName) AS ResultsCount
+FROM
+(SELECT RunName FROM `karthiproject1.karthidemo1.DedupDataGenView` ORDER BY RunTimestamp DESC LIMIT 1) AS C
+
+SELECT * FROM `karthiproject1.karthidemo1.DedupResultsView`
+WHERE RunName = 'partner-2019-06-02 18:50:37'
