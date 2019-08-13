@@ -58,12 +58,14 @@ public class ReadFromPubSub extends PTransform<PBegin, PCollection<Message>> {
             String subName =
                     "projects/" + projectId + "/subscriptions/" + subscription;
 
+            // [START PUBSUBIO_WITHIDATTRIBUTE]
             readFromPS = begin.apply(psReadJsonMessages
                             .fromSubscription(subName)
                             .withTimestampAttribute(eventTimeName)
                             // include withIdAttribute call for deduplication
                             .withIdAttribute(logicalIdName))
                     .setCoder(StringUtf8Coder.of());
+            // [END PUBSUBIO_WITHIDATTRIBUTE]
         } else {
             String subName =
                     "projects/" + projectId + "/subscriptions/" + subscription;

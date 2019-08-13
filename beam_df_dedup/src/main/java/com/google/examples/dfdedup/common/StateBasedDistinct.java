@@ -32,6 +32,7 @@ import static com.google.common.base.MoreObjects.firstNonNull;
 /*
  Dedup with Beam's internal state (*no garbage collection of state*)
  */
+// [START STATE_BASED_DISTINCT]
 public class StateBasedDistinct extends PTransform<PCollection<Message>, PCollection<Message>> {
     @Override
     public PCollection<Message> expand(PCollection<Message> msgs) {
@@ -65,3 +66,4 @@ public class StateBasedDistinct extends PTransform<PCollection<Message>, PCollec
         }
     }
 }
+// [END STATE_BASED_DISTINCT]

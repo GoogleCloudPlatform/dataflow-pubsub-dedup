@@ -31,6 +31,7 @@ import static com.google.common.base.MoreObjects.firstNonNull;
 /*
   Dedup with Beam's internal state (with garbage collection)
  */
+// [START STATE_BASED_DISTINCT_WITH_TIMER]
 public class StateBasedDistinctWithTimer extends PTransform<PCollection<Message>, PCollection<Message>> {
 
     private final Integer stateSessionGapInMinutes;
@@ -92,3 +93,4 @@ public class StateBasedDistinctWithTimer extends PTransform<PCollection<Message>
         }
     }
 }
+// [END STATE_BASED_DISTINCT_WITH_TIMER]
