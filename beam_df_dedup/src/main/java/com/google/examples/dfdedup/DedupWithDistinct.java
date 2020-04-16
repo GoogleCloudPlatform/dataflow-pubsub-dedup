@@ -30,7 +30,7 @@ public class DedupWithDistinct {
     private static final Logger LOG = LoggerFactory.getLogger(DedupWithDistinct.class);
 
     private static PCollection<Message> dedupWithDistinct(PCollection<Message> stream) {
-
+        // [START FIXED_WINDOW_DISTINCT]
         PCollection<Message> windowedStream =
                 stream.apply("WindowForDistinct",
                         Window.<Message>into(FixedWindows.of(Duration.standardSeconds(10)))
@@ -43,12 +43,12 @@ public class DedupWithDistinct {
                 windowedStream.apply(Distinct.withRepresentativeValueFn(
                         (Message m) -> (m.getLogicalId()))
                         .withRepresentativeType(TypeDescriptor.of(String.class)));
-
+        // [END FIXED_WINDOW_DISTINCT]
         return dedupedStream;
     }
 
     private static PCollection<Message> dedupWithDistinctGlobal(PCollection<Message> stream) {
-
+        // [START GLOBAL_WINDOW_DISTINCT]
         PCollection<Message> windowedStream =
                 stream.apply("WindowForDistinct",
                         Window.<Message>into(new GlobalWindows())
@@ -61,7 +61,7 @@ public class DedupWithDistinct {
                 windowedStream.apply(Distinct.withRepresentativeValueFn(
                         (Message m) -> (m.getLogicalId()))
                         .withRepresentativeType(TypeDescriptor.of(String.class)));
-
+        // [END GLOBAL_WINDOW_DISTINCT]
         return dedupedStream;
     }
 
