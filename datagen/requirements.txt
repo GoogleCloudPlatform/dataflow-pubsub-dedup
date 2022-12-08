@@ -1,5 +1,5 @@
 cachetools==3.1.1
-certifi==2019.3.9
+certifi==2022.12.7
 chardet==3.0.4
 Faker==1.0.7
 google-api-core==1.11.1
